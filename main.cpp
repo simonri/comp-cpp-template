@@ -2,7 +2,6 @@
 
 using namespace std;
 
-/*******************************************************/ 
 #define SCD(t) scanf("%d",&t)
 #define SCLD(t) scanf("%ld",&t)
 #define SCLLD(t) scanf("%lld",&t)
@@ -72,36 +71,14 @@ template <typename T> inline T readInt() {
 
 	return n*s;
 }
-/* END OF TEMPLATE */
 
-int main()
-{
-	#ifndef ONLINE_JUDGE
-	/* freopen("input.txt","r",stdin); */
-	// freopen("output.txt","w",stdout);
-	#endif
+int main() {
+  read(int);
 
+  string hoi;
+  cin>>hoi;
 
-  VS char_grades = {"E","D","C","B","A"};
-  int total_grade = -2;
-  
-  VI max_grades;
-  for(int i=0; i<3; i++) max_grades.PB(read(int));
-
-  VI grades;
-  for(int i=0; i<3; i++) grades.PB(read(int));
-
-  for(int i=2; i>=0; i--) {
-    int grade = grades[i];
-
-    if(grade == max_grades[i]) { total_grade+=2; continue; }
-    else if (grade >= (float)max_grades[i] / 2) { total_grade+=1; break; }
-
-    break;
-  }
-
-  if (total_grade < 0) total_grade = 0;
-  cout << char_grades[total_grade] << endl;
+  for(char& c : hoi) cout << c << endl;
 
 	return 0;
 }
