@@ -72,13 +72,27 @@ template <typename T> inline T readInt() {
 	return n*s;
 }
 
+int getIndex(vector<char> v, char K) {
+	auto it = find(v.begin(), v.end(), K);
+	if(it!=v.end()) return distance(v.begin(), it);
+	return -1;
+}
+
 int main() {
-  read(int);
+	freopen("output.txt", "w", stdout);
+	freopen("input.txt", "r", stdin);
 
-  string hoi;
-  cin>>hoi;
+	char alpha[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" ;
+	vector<char> alphabet(alpha,alpha+sizeof(alpha)-1);
 
-  for(char& c : hoi) cout << c << endl;
+	string input;
+	cin>>input;
+
+	int scrambles=read(int);
+
+	sort(input.begin(), input.end());
+
+	cout << getIndex(alphabet, 'C') << endl;
 
 	return 0;
 }
