@@ -5,9 +5,9 @@ using namespace std;
 #define ld long double
 #define ar array
 
-#include <ext/pb_ds/assoc_container.hpp>
-#include <ext/pb_ds/tree_policy.hpp>
-using namespace __gnu_pbds;
+/* #include <ext/pb_ds/assoc_container.hpp> */
+/* #include <ext/pb_ds/tree_policy.hpp> */
+/* using namespace __gnu_pbds; */
 
 #define vt vector
 #define pb push_back
@@ -161,44 +161,29 @@ template<class T, class U> void vti(vt<T> &v, U x, size_t n, size_t m...) {
 const int d4i[4]={-1, 0, 1, 0}, d4j[4]={0, 1, 0, -1};
 const int d8i[8]={-1, -1, 0, 1, 1, 1, 0, -1}, d8j[8]={0, 1, 1, 1, 0, -1, -1, -1};
 
-
 int getIndex(vector<char> v, char K) {
 	auto it = find(v.begin(), v.end(), K);
+
 	if(it!=v.end()) return distance(v.begin(), it);
 	return -1;
 }
 
-void solve() {
-	char alpha[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	vector<char> alphabet(alpha, alpha+sizeof(alpha)-1);
+double slope(const vector<double>& x, const vector<double>& y){
+	size_t n = x.size();
 
-	string input;
-	read(input);
+	double avgX = accumulate(x.begin(), x.end(), 0.0) / n;
+	double avgY = accumulate(y.begin(), y.end(), 0.0) / n;
 
-	vt<int> vec, char c;
-	EACH(c, input) {
-		int pos = getIndex(alphabet, c);
-		vec.pb(pos);
+	double numerator = 0.0;
+	double denominator = 0.0;
+
+	for(size_t i=0; i<n; ++i){
+		numerator += (x[i] - avgX) * (y[i] - avgY);
+		denominator += (x[i] - avgX) * (x[i] - avgX);
 	}
 
-	int scrambles;
-	read(scrambles);
-	
-	while(scrambles > 0) {
-		for(int i=0; i<(int)vec.size()-1; i++) {
-			if(vec[i] > vec[i+1]) {
-				swap(vec[i], vec[i+1]);
-				scrambles--;
-			} else if(i == (int)vec.size()-2) {
-				scrambles=0;
-			}
-		}
-	}
-
-	int f;
-	EACH(f, vec) cout << alphabet[f] << endl;
+	return numerator / denominator;
 }
-	
 
 int main() {
 	ios::sync_with_stdio(0);
@@ -207,9 +192,27 @@ int main() {
 	freopen("output.txt", "w", stdout);
 	freopen("input.txt", "r", stdin);
 	
-	cout << "Hello " << endl;
+	int c;
+	read(c);
 
-	solve();
+	vt<double> x, y;
+
+	for(int i = 0; i < c; i++) {
+		double a, b;
+
+		read(a);
+		read(b);
+
+		x.pb(a);
+		y.pb(b);
+	}
+
+	double f = slope(x, y);
+
+	double l;
+	read(l);
+
+	cout << round((l * f) / 5) * 5;
 
 	return 0;
 }
