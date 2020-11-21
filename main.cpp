@@ -191,28 +191,34 @@ int main() {
 
 	freopen("output.txt", "w", stdout);
 	freopen("input.txt", "r", stdin);
-	
-	int c;
+
+	int c, days;
 	read(c);
+	read(days);
 
-	vt<double> x, y;
-
-	for(int i = 0; i < c; i++) {
-		double a, b;
-
+	int[] arr[c];
+	for(int i=0; i<3; i++) {
+		int a;
 		read(a);
-		read(b);
 
-		x.pb(a);
-		y.pb(b);
+		arr[a-1] = 1;
 	}
 
-	double f = slope(x, y);
+	for(int i=0; i<days; i++) {
+		for(int j=0; j<c; j++) {
+			if(arr[j]) {
+				arr[j-1] = 1;
+				arr[j+1] = 1;
+			}
+		}
+	}
 
-	double l;
-	read(l);
+	int count = 0;
+	for(int i=0; i<c; i++) {
+		if(arr[i]) count++;
+	}
 
-	cout << round((l * f) / 5) * 5;
+	cout << count;
 
-	return 0;
+	map<	return 0;
 }
