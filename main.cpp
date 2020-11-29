@@ -23,16 +23,41 @@ void solve() {
 	string word;
 	cin >> word;
 
-	int cSynonyms;
+	ll cSynonyms;
 	cin >> cSynonyms;
 
-	vector<string> synonyms;
-	for(int i = 0; i < cSynonyms; i++) {
+	ll result = 0;
+
+	for(ll i = 0; i < cSynonyms; i++) {
 		string inp;
 		cin >> inp;
-		synonyms.pb(inp);
-		cout << inp << endl;
+
+		ll streak = 0;
+		bool valid = false;
+		ll found = 0;
+
+		for(char c : word) {
+			if(inp[found] == c) {
+				streak = 0;
+				found++;
+			}
+
+			if(inp[found-1] == c) {
+				streak++;
+			}
+
+			if(streak >= 2) {
+				valid = true;
+				break;
+			}
+		}
+
+		if(valid) {
+			result++;
+		}
 	}
+
+	cout << result;
 }
 
 int main() {
